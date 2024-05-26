@@ -1,10 +1,10 @@
 # ScholarBridge by Tech-Tribe
 This is the repository for the initial screening round of Hackathon. <br>
-<b>Our team (Tech-Tribe) members are:
+<b>Our team (Tech-Tribe) members are:<br>
 Nakka Bhuvan Lohit Dev - VU21CSEN0100463<br>
 Varri Ram Narisimha Tharakeswar - VU21CSEN0100414<br>
 Narava Surekha - VU21CSEN0100369<br>
-Aparna Aakondi - VU21CSEN0100340
+Aparna Aakondi - VU21CSEN0100340<br>
 Shreya Dhannarapu- VU21CSEN0100144
 </b><br>
 
