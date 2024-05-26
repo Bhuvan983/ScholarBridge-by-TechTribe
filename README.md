@@ -76,3 +76,5 @@ Q&A Support: Offering guidance and templates for common queries related to resea
 
 ![WhatsApp Image 2024-05-26 at 18 33 26_717d45f8](https://github.com/Bhuvan983/ScholarBridge-by-TechTribe/assets/104959919/5d174e7a-c392-491d-99fc-2a41260dc89f)
 
+ok done
+
