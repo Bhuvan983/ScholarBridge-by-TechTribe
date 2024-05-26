@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micron</title>
+    <style>
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hamburger-icon {
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+            transition: opacity 0.5s;
+        }
+
+        header {
+            background-color: #19d5bcc3;
+            color: #ffffff;
+            padding: 20px 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+        }
+
+        .main {
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            flex: 1;
+            align-items: flex-start;
+            justify-content: space-around;
+            gap: 40px; 
+            margin-left: 15%;
+            width: 70%;
+        }
+
+        .box1, .box2, .box3 {
+            padding: 20px;
+            background-color: #f9f9f9;
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),  /* Small shadow */
+                0 8px 12px rgba(0, 0, 0, 0.1), /* Medium shadow */
+                0 12px 16px rgba(0, 0, 0, 0.1); /* Large shadow */
+            transition: transform 0.3s ease;
+            overflow: hidden; /* Ensure content does not overflow */
+            position: relative; /* For positioning the info box */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .box1:hover, .box2:hover, .box3:hover {
+            transform: translateY(-10px);
+        }
+
+        .box1 img, .box2 img, .box3 img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Ensure the image covers the entire div */
+        }
+
+        .info-container {
+            position: fixed;
+            width: 300px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            pointer-events: none; /* Prevents info-container from receiving pointer events */
+        }
+
+        .info-container h2 {
+            margin-top: 0;
+        }
+
+        .button-3d {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 5px #0056b3;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .button-3d:active {
+            box-shadow: 0 2px #0056b3;
+            transform: translateY(3px);
+        }
+
+        .chat-sidebar {
+            position: fixed;
+            right: 0;
+            top: 60px; /* Adjusted to start after the header */
+            bottom: 30px;
+            width: 300px;
+            height: calc(100% - 80px); /* Adjusted to fill the rest of the viewport */
+            background-color: #f9f9f9;
+            border-left: 1px solid #ccc;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            padding: 20px;
+            transition: 4s ease-in;
+            border-radius: 12px;
+        }
+
+        .chat-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .close-button {
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chat-input button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+    <script>
+        function showInfo(name, age, occupation, email, event) {
+            var infoContainer = document.getElementById('info-container');
+            infoContainer.style.display = 'block';
+            infoContainer.innerHTML = `
+                <h2>${name}</h2>
+                <p><strong>Year of Passout:</strong> ${age}</p>
+                <p><strong>Company:</strong> ${occupation}</p>
+                <p><strong>Occupation:</strong> ${email}</p>
+                <p><strong>Linkedin:</strong><a href="#">Linkedin.com</a></p>
+            `;
+            var offsetX = 20; // Offset from the cursor
+            var offsetY = 20; // Offset from the cursor
+            infoContainer.style.left = (event.clientX + offsetX) + 'px';
+            infoContainer.style.top = (event.clientY + offsetY) + 'px';
+        }
+
+        function hideInfo() {
+            var infoContainer = document.getElementById('info-container');
+            infoContainer.style.display = 'none';
+        }
+
+        function openChat(name) {
+            var chatSidebar = document.getElementById('chat-sidebar');
+            var chatHeader = document.getElementById('chat-header');
+            chatHeader.innerText = 'Chat with ' + name;
+            chatSidebar.style.display = 'flex';
+        }
+
+        function closeChat() {
+            var chatSidebar = document.getElementById('chat-sidebar');
+            chatSidebar.style.display = 'none';
+        }
+
+        function sendMessage() {
+            var messageInput = document.getElementById('message-input');
+            var chatMessages = document.getElementById('chat-messages');
+            var message = messageInput.value;
+            if (message.trim() !== '') {
+                var messageElement = document.createElement('div');
+                messageElement.innerText = message;
+                chatMessages.appendChild(messageElement);
+                messageInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+    </script>
+</head>
+<body style="background-color: rgba(195, 255, 0, 0.64);">
+    <header class="text-center py-4">
+        <div class="header-content">
+            <div class="hamburger-icon" onclick="toggleNav()">&#9776;</div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Micron_Technology_logo.svg/1280px-Micron_Technology_logo.svg.png" width="200px">
+        </div>
+    </header>
+     
+    <div class="main">
+        <div class="box1" onmouseover="showInfo('Swathi', 2010, 'Micron', 'Senior Software Engineer specializing in cloud computing', event )" onmouseout="hideInfo()">
+            <img src="https://t4.ftcdn.net/jpg/04/10/16/65/360_F_410166561_bZLl3qZRt68JCK9JDkgauSDiABqsrK4I.jpg" alt="Image 1">
+            <button type="button" class="button-3d" onclick="openChat('Arjun Sharma')">Connect</button>
+        </div>
+        <div class="box2" onmouseover="showInfo('Arjun Sharma', 2012, 'Micron', 'Product Manager leading e-commerce innovations', event)" onmouseout="hideInfo()">
+            <img src="https://media.istockphoto.com/id/1473711199/photo/face-portrait-student-and-man-in-university-ready-for-back-to-school-learning-goals-or.jpg?s=612x612&w=0&k=20&c=Xrwp5ePvm6RjixgAjJo-OAw9oXkLt_HcmT3bdlLZUdw=" alt="Image 2">
+            <button type="button" class="button-3d" onclick="openChat('Swathi')">Connect</button>
+        </div>
+        <div class="box3" onmouseover="showInfo('Priya Singh', 2009, 'Micron', 'Marketing Manager for global social media campaigns', event)" onmouseout="hideInfo()">
+            <img src="m3.jpg" alt="Image 3">
+            <button type="button" class="button-3d" onclick="openChat('Priya Singh')">Connect</button>
+        </div>
+    </div>
+
+    <div id="info-container" class="info-container"></div>
+
+    <div id="chat-sidebar" class="chat-sidebar">
+        <div id="chat-header" class="chat-header">
+            <span>Chat</span>
+            <button class="close-button" onclick="closeChat()">Close</button>
+        </div>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button type="button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</body>
+</html>

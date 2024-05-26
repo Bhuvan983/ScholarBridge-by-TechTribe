@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details Form</title>
+    <link rel="stylesheet" href="css1/stylo.css">
+
+   
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#"></a></li>
+            <li><a href="home.html">RESEARCH COLLAB SPACE</a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+    </nav>
+    <div style="align-items: center;align-self: center; align-content: center;">
+        <h1>PROFILE</h1>
+    </div>
+    
+    <div class="content">
+        <div class="split-container">
+            <div class="form-container">
+                <h1>Student Details Form</h1>
+                <form id="studentForm" enctype="multipart/form-data">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Full Name" required pattern="[A-Z][a-zA-Z]"><br><br>
+                    
+                    <label for="email">Gitam Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Gitam Email" required><br><br>
+                    
+                    <div class="input-group">
+                        <div>
+                            <label for="rollNo">Roll No:</label>
+                            <input type="text" id="rollNo" name="rollNo" placeholder="Roll No" required>
+                        </div>
+                        <div>
+                            <label for="semester">Current Semester:</label>
+                            <select id="semester" name="semester" required>
+                                <option value="" disabled selected>Select Semester</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+                    </div><br>
+                    
+                    <label for="skills">Skills (Comma Separated):</label>
+                    <input type="text" id="skills" name="skills" placeholder="Skills" required><br><br>
+                    
+                    <div id="projectsContainer">
+                        <div class="project">
+                            <label>Project Name:</label>
+                            <input type="text" name="projectName[]" placeholder="Project Name" required><br><br>
+                            <label>Project Description:</label>
+                            <textarea name="projectDescription[]" placeholder="Project Description" rows="4" cols="50" required></textarea>
+                        </div>
+                    </div>
+                    <button type="button" onclick="addProject()">Add Another Project</button><br><br>
+                    
+                    <label for="areasOfWork">Interested Areas to Work:</label>
+                    <textarea id="areasOfWork" name="areasOfWork" placeholder="Interested Areas to Work" rows="4" cols="50" required></textarea><br><br>
+                    
+                    <label for="fileUpload">Upload Image(Passport Size Only):</label>
+                    <input type="file" id="fileUpload" name="fileUpload" accept="image/*"><br><br>
+                    
+                    <input id="submit_button" type="button" value="Submit" onclick="submitForm()">
+                </form>
+            </div>
+
+            <div class="formatted-details" id="displayArea">
+                <div class="image-container" id="imageContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function submitForm() {
+        var fullName = document.getElementById("fullName").value;
+        var email = document.getElementById("email").value;
+        var rollNo = document.getElementById("rollNo").value;
+        var semester = document.getElementById("semester").value;
+        var skillsInput = document.getElementById("skills").value;
+        var skillsList = skillsInput.split(",").map(skill => skill.trim());
+        var projects = document.querySelectorAll(".project");
+        var projectNames = [];
+        var projectDescriptions = [];
+
+        projects.forEach(project => {
+            var projectName = project.querySelector("input[name='projectName[]']").value;
+            var projectDescription = project.querySelector("textarea[name='projectDescription[]']").value;
+            projectNames.push(projectName);
+            projectDescriptions.push(projectDescription);
+        });
+
+        var areasOfWork = document.getElementById("areasOfWork").value;
+        var fileUpload = document.getElementById("fileUpload").files[0];
+
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var imgSrc = event.target.result;
+            var formattedData = "";
+
+            // Create the image container with the uploaded image
+            formattedData += "<div class='image-container'>";
+            formattedData += "<img src='" + imgSrc + "' alt='Uploaded Image'>";
+            formattedData += "</div>";
+
+            // Your existing profile information
+            formattedData += "<h2>Student Profile:</h2>";
+            formattedData += "<p><strong>Full Name:</strong> " + fullName + "</p>";
+            formattedData += "<p><strong>Email:</strong> " + email + "</p>";
+            formattedData += "<p><strong>Roll No:</strong> " + rollNo + "</p>";
+            formattedData += "<p><strong>Semester:</strong> " + semester + "</p>";
+            formattedData += "<p><strong>Skills:</strong> <ul>";
+            skillsList.forEach(skill => {
+                formattedData += "<li>" + skill + "</li>";
+            });
+            formattedData += "</ul></p>";
+            formattedData += "<div class='project-details'>";
+            for (var i = 0; i < projectNames.length; i++) {
+                formattedData += "<p><strong>Project Name:</strong> " + projectNames[i] + "</p>";
+                formattedData += "<p style='margin-left: 20px;'><strong>Project Description:</strong> " + projectDescriptions[i] + "</p>";
+            }
+            formattedData += "</div>";
+            formattedData += "<p><strong>Areas of Interest:</strong> " + areasOfWork + "</p>";
+
+            document.getElementById("displayArea").innerHTML = formattedData;
+            document.getElementById("saveButton").style.display = "block";
+        };
+
+        if (fileUpload) {
+            reader.readAsDataURL(fileUpload);
+        } else {
+            // Your existing code
+        }
+    }
+
+    function addProject() {
+        var projectsContainer = document.getElementById("projectsContainer");
+        var projectDiv = document.createElement("div");
+        projectDiv.classList.add("project");
+        projectDiv.innerHTML = `
+            <hr>
+            <label>Project Name:</label>
+            <input type="text" name="projectName[]" placeholder="Project Name" required><br><br>
+            <label>Project Description:</label>
+            <textarea name="projectDescription[]" placeholder="Project Description" rows="4" cols="50" required></textarea>
+        `;
+        projectsContainer.appendChild(projectDiv);
+    }
+
+    function saveProfile() {
+        alert("Profile Saved!");
+    }
+    function toggleNav() {
+        var sidebar = document.getElementById("mySidebar");
+        var content = document.getElementById("content");
+        var icon = document.getElementsByClassName("hamburger-icon")[0];
+
+        if (sidebar.style.width === "250px") {
+            // Close the sidebar
+            sidebar.style.width = "0";
+            content.style.marginLeft = "0";
+            icon.style.opacity = "1";
+        } else {
+            // Open the sidebar
+            sidebar.style.width = "250px";
+            content.style.marginLeft = "250px";
+            icon.style.opacity = "0";
+        }
+    }
+    </script>
+
+    <button id="saveButton" onclick="saveProfile()" style="display: none;">Save Profile</button>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarBridge - Research</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #b1040e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+        }
+        main {
+            padding: 20px;
+        }
+        .heading-section {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .section {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .section h2 {
+            margin: 0;
+        }
+        .subsection {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .image-container {
+            width: 30%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .image-container p {
+            margin: 5px 0 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Research Collaboration Space</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="pracweb.html">Profile</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="heading-section">
+            <h2>Machine Learning</h2>
+        </section>
+
+        <section class="section" onclick="toggleVisibility('professorPhotos')">
+            <h2>Professors</h2>
+            <div class="subsection" id="professorPhotos">
+                <!-- Images will be inserted here -->
+            </div>
+        </section>
+          
+        <section class="section" onclick="toggleVisibility('assistantProfessorPhotos')">
+            <h2>Associate Professors</h2>
+            <div class="subsection" id="assistantProfessorPhotos">
+                <!-- Images of assistant professors will be inserted here -->
+            </div>
+        </section>
+          
+        <section class="section" onclick="toggleVisibility('associateProfessorPhotos')">
+            <h2>Assistant Professors</h2>
+            <div class="subsection" id="associateProfessorPhotos">
+                <!-- Images of associate professors will be inserted here -->
+            </div>
+        </section>
+          
+        <script>
+          
+
+          function toggleVisibility(id) {
+    var section = document.getElementById(id);
+    if (section.style.display === "none") {
+        section.style.display = "block";
+        if (id === "professorPhotos") {
+            loadProfessorPhotos();
+        }else if (id === "associateProfessorPhotos") {
+            loadAssociateProfessorPhotos();}
+            else if (id === "assistantProfessorPhotos") {
+            loadAssistantProfessorPhotos();
+        } 
+        
+    } else {
+        section.style.display = "none";
+    }
+}
+
+
+function loadProfessorPhotos() {
+    var professors = [
+    { name: "Dr. P.V.Nageswara Rao", image: "images1/ml1.1.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=V-Nageswara-Rao-P-$$MTIwMw==" },
+    { name: "Dr. Y Radhika", image: "images1/ml1.2.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Radhika-Y-$$MTI0Mw==" },
+    { name: "Dr. Manda Rama Narasingarao", image: "images1/ml1.3.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Rama-Narasinga-Rao-Manda$$NTAxMzk5" },
+    { name: "Dr. Gorla Srinivas", image: "images1/ml1.4.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Srinivas-Gorla$$MTIwMDM3" }
+    
+];
+
+
+
+
+
+
+        var professorPhotosDiv = document.getElementById("professorPhotos");
+    professorPhotosDiv.innerHTML = "";
+
+    for (var i = 0; i < professors.length; i++) {
+        var professor = professors[i];
+        var img = document.createElement("img");
+        img.src = professor.image;
+        img.alt = professor.name;
+        img.title = professor.name;
+        img.style.width = "30%"; // Adjust width to fit 4 images per row
+        img.style.margin = "10px"; // Increase margin for spacing
+        img.style.cursor = "pointer";
+        img.onclick = function() {
+            window.location.href = professor.link;
+        };
+
+        var namePara = document.createElement("p");
+        namePara.textContent = professor.name;
+        namePara.style.textAlign = "center";
+
+        var div = document.createElement("div");
+        div.style.display = "inline-block";
+        div.style.width = "30%"; // Adjust width to fit 4 images per row
+        div.style.textAlign = "center"; // Center align the content
+        div.appendChild(img);
+        div.appendChild(namePara);
+
+        professorPhotosDiv.appendChild(div);
+
+        if ((i + 1) % 4 === 0 || i === professors.length - 1) {
+            professorPhotosDiv.appendChild(document.createElement("br")); // Add line break after every row
+        }
+    }
+}
+
+function loadAssociateProfessorPhotos() {
+    var associateProfessors = [
+    { name: "Sri A.S. Venkata Praneel", image: "images1/ml1.11.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Sri-Venkata-Praneel-Ankireddy$$MTM1Mg==" },
+    { name: "Dr.Eadha Neelima", image: "images1/ml1.12.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Neelima-Eadha$$MTMyNA==" },
+    { name: "Dr. G. L. Aruna Kumari", image: "images1/ml1.13.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=L-Aruna-Kumari-G-$$NDEyNg==" },
+    { name: "Sri. S. Mohan Krishna", image: "images1/ml1.14.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Mohan-Krishna-S-$$MTkxMQ==" }
+   
+    ];
+
+    var associateProfessorPhotosDiv = document.getElementById("associateProfessorPhotos");
+    associateProfessorPhotosDiv.innerHTML = "";
+
+    for (var i = 0; i < associateProfessors.length; i++) {
+        var professor = associateProfessors[i];
+        var img = document.createElement("img");
+        img.src = professor.image;
+        img.alt = professor.name;
+        img.title = professor.name;
+        img.style.width = "30%";
+        img.style.margin = "10px";
+        img.style.cursor = "pointer";
+        img.onclick = function() {
+            window.location.href = professor.link;
+        };
+
+        var namePara = document.createElement("p");
+        namePara.textContent = professor.name;
+        namePara.style.textAlign = "center";
+
+        var div = document.createElement("div");
+        div.style.display = "inline-block";
+        div.style.width = "30%";
+        div.style.textAlign = "center";
+        div.appendChild(img);
+        div.appendChild(namePara);
+
+        associateProfessorPhotosDiv.appendChild(div);
+
+        if ((i + 1) % 4 === 0 || i === associateProfessors.length - 1) {
+            associateProfessorPhotosDiv.appendChild(document.createElement("br"));
+        }
+    }
+}
+function loadAssistantProfessorPhotos() {
+    var assistantProfessors = [
+    { name: "Dr. Srinivasa Rao Routhu", image: "images1/ml1.6.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Srinivasa-Rao-Routhu$$NTAxNjYz" },
+    { name: "Dr. K. Srinivasa Rao", image: "images1/ml1.7.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Srinivasa-Rao-K-$$NDExOA==" },
+    { name: "Dr. T Sankara Rao", image: "images1/ml1.8.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=Sankara-Rao-T-$$MTI0Nw==" },
+    { name: "Dr. P N R L Chandrasekhar", image: "images1/ml1.9.jpg", link: "https://www.gitam.edu/gitam-school-technology-visakhapatnam/departments/computer-science-and-engineering/faculty-profile?info=N-R-L-Chandra-Sekhar-P-$$MTI0OA==" }
+    
+
+   
+   ];
+
+    var assistantProfessorPhotosDiv = document.getElementById("assistantProfessorPhotos");
+    assistantProfessorPhotosDiv.innerHTML = "";
+
+    for (var i = 0; i < assistantProfessors.length; i++) {
+        var professor = assistantProfessors[i];
+        var img = document.createElement("img");
+        img.src = professor.image;
+        img.alt = professor.name;
+        img.title = professor.name;
+        img.style.width = "30%";
+        img.style.margin = "10px";
+        img.style.cursor = "pointer";
+        img.onclick = function() {
+            window.location.href = professor.link;
+        };
+
+        var namePara = document.createElement("p");
+        namePara.textContent = professor.name;
+        namePara.style.textAlign = "center";
+
+        var div = document.createElement("div");
+        div.style.display = "inline-block";
+        div.style.width = "30%";
+        div.style.textAlign = "center";
+        div.appendChild(img);
+        div.appendChild(namePara);
+
+        assistantProfessorPhotosDiv.appendChild(div);
+
+        if ((i + 1) % 4 === 0 || i === assistantProfessors.length - 1) {
+            assistantProfessorPhotosDiv.appendChild(document.createElement("br"));
+        }
+    }
+}
+
+
+
+
+            document.querySelectorAll('.subsection').forEach(subsection => {
+                subsection.style.display = 'none';
+            });
+        </script>
+    </main>
+    
+</body>
+</html>
