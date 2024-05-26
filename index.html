@@ -1,49 +1,138 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <center>
-            <h2>
-                <?php 
-  session_start();
-  if(isset($_SESSION['unique_id'])){
-    header("location: users.php");
-  }
-?>
-
-<?php include_once "header.php"; ?>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarBridge</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            background-color: #f0f0f0; /* Adjust the background color */
+        }
+        .about {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 0; /* Adjust the vertical padding */
+        }
+        .about h1 {
+            margin-bottom: 20px;
+        }
+        .about p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .course-col a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        .logo {
+            width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .course-col {
+            flex-basis: 45%; /* Adjust the flex-basis value */
+            background: #fff3f3;
+            border-radius: 10px;
+            margin-bottom: 5%;
+            padding: 20px 12px;
+            box-sizing: border-box;
+            transition: 0.5s;
+        }
+        .course {
+            padding: 30px 0; /* Adjust the vertical padding */
+        }
+    </style>
+</head>
 <body>
-  <div class="wrapper">
-    <section class="form login">
-      <header>Login</header>
-      <form action="#" method="POST" enctype="multipart/form-data" autocomplete="off">
-        <div class="error-text"></div>
-        <div class="field input">
-          <label>Email Address</label>
-          <input type="text" name="email" placeholder="Enter your email" required>
-        </div>
-        <div class="field input">
-          <label>Password</label>
-          <input type="password" name="password" placeholder="Enter your password" required>
-          <i class="fas fa-eye"></i>
-        </div>
-        <div class="field button">
-          <input type="submit" name="submit" value="Login">
-        </div>
-      </form>
-      <div class="link">Not yet signed up? <a href="index.php">Signup now</a></div>
-    </section>
-  </div>
-  
-  <script src="javascript/pass-show-hide.js"></script>
-  <script src="javascript/login.js"></script>
-
+    <div class="wrapper">
+        <section class="header">
+            <nav>
+                <a href="index.html">
+                    <img src="logo.png" alt="Logo" class="logo">
+                </a>
+                <span class="logo-name">ScholarBridge</span>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="D:\Downloads\mergemain\index.html">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+    
+            <div class="text-box">
+                <h1>Scholars to wisdom seekers</h1>
+                <p>Your Gateway to Research and Career Connections</p>
+                <a href="#what-we-offer" class="hero-btn">Get Started</a>
+            </div>
+        </section>
+    
+        <!--------- About ---------->
+        <section id="about" class="about">
+            <h1>About Us</h1>
+            <p>We are a team of five dedicated third-year Computer Science and Engineering students from GITAM passionate about bridging the gap between academia and professional growth. At ScholarBridge, our mission is to facilitate meaningful connections between students, faculty, and alumni, fostering a collaborative environment for research and career development. <br>Our platform is designed to empower students by providing easy access to faculty for research collaboration and to alumni for career guidance and networking opportunities.</p>
+        </section>
+    
+        <!---------Course---------->
+        <section id="what-we-offer" class="course">
+            <h1>What We Offer</h1>
+            <p>Bridging the gap between students, faculty, and alumni.</p>
+            <div class="row">
+                <div class="course-col">
+                    <a href="home.html">
+                        <h3>Faculty Connect</h3>
+                        <p>Our platform is designed to bridge the gap between students and faculty, facilitating meaningful research collaborations. Students can easily browse through faculty profiles, which highlight their research interests, current projects, and publications.</p>
+                    </a>
+                </div>
+                <div class="course-col">
+                    <a href="Alumni.html">
+                        <h3>Alumni Connect</h3>
+                        <p>We help alumni stay connected with their alma mater and provide valuable guidance to current students. By connecting with alumni, students can gain valuable insights into various industries, learn from real-world experiences, and receive support as they transition from academic life to their professional careers.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    
+        <!-- -------Footer------- -->
+        <section class="footer">
+            <p>Connect to collaborate  <br>Join us on ScholarBridge as we work towards building a brighter future through innovation, collaboration, and growth</p>
+            <div class="icons">
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-twitter"></i>
+                <i class="fa fa-instagram"></i>
+                <i class="fa fa-linkedin"></i>
+            </div>
+        </section>
+    
+        <!-------------------------JavaScript for Toggle Menu-------------------------->
+        <script>
+            var navLinks = document.getElementById("navLinks");
+    
+            function showMenu(){
+                navLinks.style.right = "0";
+            }
+            function hideMenu(){
+                navLinks.style.right = "-200px";
+            }
+        </script>
+    </div>
 </body>
-</html>
-
-            </h2>
-        </center>
-    </body>
 </html>
